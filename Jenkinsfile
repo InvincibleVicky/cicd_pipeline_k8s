@@ -3,14 +3,14 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                git url:'https://github.com/akshu20791/cicdakshat/', branch: "master"
+                git url:'https://github.com/InvincibleVicky/cicd_pipeline_k8s/', branch: "master"
                sh 'mvn clean install'
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t akshu20791/endtoendproject25may:v1 .'
+                    sh 'docker build -t vigneshwar1908/cicd_pipeline_project_k8s:v1 .'
                 }
             }
         }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push akshu20791/endtoendproject25may:v1'
+                    sh 'docker push vigneshwar1908/cicd_pipeline_project_k8s:v1'
                 }
             }
         }
