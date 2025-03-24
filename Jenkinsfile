@@ -10,7 +10,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t vigneshwar1908/cicd_pipeline_project_k8s:v1 .'
+                    sh 'docker build -t vigneshwar1908/cicd_pipeline_project_k8s:v2 .'
                 }
             }
         }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push vigneshwar1908/cicd_pipeline_project_k8s:v1'
+                    sh 'docker push vigneshwar1908/cicd_pipeline_project_k8s:v2'
                 }
             }
         }
